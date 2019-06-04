@@ -27,48 +27,93 @@
 // const brad = new Person('Brad', '9-10-1981');
 // console.log(brad.calculateAge());
 
-// Built in Constructors
+// // Built in Constructors
 
-// String
+// // String
 
-const name1 = "Jeff";
-const name2 = new String("Jeff");
+// const name1 = "Jeff";
+// const name2 = new String("Jeff");
 
-//name2.foo = 'bar';
-// console.log(name2);
+// //name2.foo = 'bar';
+// // console.log(name2);
 
-console.log(typeof name2);
+// console.log(typeof name2);
 
-if (name2 === "Jeff") {
-  console.log("Yes");
-} else {
-  console.log("NO");
+// if (name2 === "Jeff") {
+//   console.log("Yes");
+// } else {
+//   console.log("NO");
+// }
+
+// // Number
+// const num1 = 5;
+// const num2 = new Number(5);
+
+// // Boolean
+// const bool1 = true;
+// const bool2 = new Boolean(true);
+
+// // Function
+// const getSum1 = function(x, y) {
+//   return x + y;
+// };
+
+// const getSum2 = new Function("x", "y", "return 1 + 1");
+
+// // Object
+// const john1 = { name: "John" };
+// const john2 = new Object({ name: "John" });
+// console.log(john2);
+
+// // Arrays
+// const arr1 = [1, 2, 3, 4];
+// const arr2 = new Array(1, 2, 3, 4);
+
+// // Regular Expressions
+// const re1 = /\w+/;
+// const re2 = new RegExp("\\w+");
+
+// Object.prototype
+// Person.prototype
+function Person(firstName, lastName, dob) {
+  this.firstName = firstName;
+  this.lastName = lastName;
+  this.birthday = new Date(dob);
+  //   this.calculateAge = function() {
+  //     const diff = Date.now() - this.birthday.getTime();
+  //     const ageDate = new Date(diff);
+  //     return Math.abs(ageDate.getUTCFullYear() - 1970);
+  //   }
 }
 
-// Number
-const num1 = 5;
-const num2 = new Number(5);
+// Calculate age
+Person.prototype.calculateAge = function(){
+    const diff = Date.now() - this.birthday.getTime();
+    const ageDate = new Date(diff);
+    return Math.abs(ageDate.getUTCFullYear() - 1970);
+  }
 
-// Boolean
-const bool1 = true;
-const bool2 = new Boolean(true);
+  // Get full name
+  Person.prototype.getFullName = function () {
+    return `${this.firstName} ${this.lastName}`;
+  }
 
-// Function
-const getSum1 = function(x, y) {
-  return x + y;
-};
+  // Gets Married
+  Person.prototype.getsMarried = function(newLastName){
+    this.lastName = newLastName;
+  }
 
-const getSum2 = new Function("x", "y", "return 1 + 1");
+const john = new Person('John', 'Doe', '8-12-90');
+const mary = new Person('Mary', 'Johnson', 'March 20 1978');
 
-// Object
-const john1 = { name: "John" };
-const john2 = new Object({ name: "John" });
-console.log(john2);
+console.log(mary);
 
-// Arrays
-const arr1 = [1, 2, 3, 4];
-const arr2 = new Array(1, 2, 3, 4);
+console.log(john.calculateAge());
 
-// Regular Expressions
-const re1 = /\w+/;
-const re2 = new RegExp("\\w+");
+console.log(mary.getFullName());
+
+mary.getsMarried('Smith');
+
+console.log(mary.getFullName());
+
+console.log(mary.hasOwnProperty('getFullName'));
